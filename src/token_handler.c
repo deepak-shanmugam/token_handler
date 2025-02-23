@@ -33,7 +33,8 @@ static int is_double_quote(char ch);
 static int is_back_slash(char ch);
 
 
-token_handler create_token_handler(int string_size, int max_token)
+token_handler 
+create_token_handler(int string_size, int max_token)
 {
     token_handler handler;
     if (string_size <= 0 || max_token <= 0 || max_token > string_size) {
@@ -60,7 +61,8 @@ token_handler create_token_handler(int string_size, int max_token)
     return handler;
 }
 
-void free_token_handler(token_handler handler)
+void 
+free_token_handler(token_handler handler)
 {
     if (handler == NULL) {
         return;
@@ -77,7 +79,8 @@ void free_token_handler(token_handler handler)
     free(handler);
 }
 
-int set_token_handler(token_handler handler, const char *string)
+int 
+set_token_handler(token_handler handler, const char *string)
 {
     int index;
     if (handler == NULL || string == NULL) {
@@ -97,7 +100,8 @@ int set_token_handler(token_handler handler, const char *string)
     return set_token(handler);
 }
 
-char* get_token_from_handler(token_handler handler, int token_index)
+char* 
+get_token_from_handler(token_handler handler, int token_index)
 {
     if (handler == NULL || token_index < 0) {
         fprintf(stderr,"get_token_from_handler: argument error!\n");
@@ -109,7 +113,8 @@ char* get_token_from_handler(token_handler handler, int token_index)
     return handler->token[token_index];
 }
 
-int get_size_from_token_handler(token_handler handler)
+int 
+get_size_from_token_handler(token_handler handler)
 {
     if (handler == NULL) {
         return 0;
@@ -117,7 +122,8 @@ int get_size_from_token_handler(token_handler handler)
     return handler->size;
 }
 
-int get_max_token_from_handler(token_handler handler)
+int 
+get_max_token_from_handler(token_handler handler)
 {
     if (handler == NULL) {
         return 0;
@@ -125,7 +131,8 @@ int get_max_token_from_handler(token_handler handler)
     return handler->max_token;
 }
 
-void change_token_separator(token_handler handler, SeparatorIdentFunc is_separator_fn)
+void 
+change_token_separator(token_handler handler, SeparatorIdentFunc is_separator_fn)
 {
     if (handler == NULL || is_separator_fn == NULL) {
         fprintf(stderr,"change_token_separator: argument error!\n");
@@ -134,7 +141,8 @@ void change_token_separator(token_handler handler, SeparatorIdentFunc is_separat
     handler->is_separator = is_separator_fn;
 }
 
-void change_token_delimiter(token_handler handler, DelimiterIdentFunc is_delimiter_fn)
+void 
+change_token_delimiter(token_handler handler, DelimiterIdentFunc is_delimiter_fn)
 {
     if (handler == NULL || is_delimiter_fn == NULL) {
         fprintf(stderr,"change_token_delimiter: argument error!\n");
@@ -143,7 +151,8 @@ void change_token_delimiter(token_handler handler, DelimiterIdentFunc is_delimit
     handler->is_delimiter = is_delimiter_fn;
 }
 
-void change_escape_character(token_handler handler, EscapeIdentFunc is_escape_fn)
+void 
+change_escape_character(token_handler handler, EscapeIdentFunc is_escape_fn)
 {
     if (handler == NULL || is_escape_fn == NULL) {
         fprintf(stderr,"change_escape_in_delimiter: argument error!\n");
@@ -155,7 +164,8 @@ void change_escape_character(token_handler handler, EscapeIdentFunc is_escape_fn
 /*
  * to seperate a single string into individual tokens
  */
-static int seperate_string_token(token_handler handler)
+static int 
+seperate_string_token(token_handler handler)
 {
     char *str = handler->string;
     int inside_delimiter = 0;
@@ -183,7 +193,8 @@ static int seperate_string_token(token_handler handler)
 /*
  * to set token pointers to point individual seperated tokens
  */
-static int set_token(token_handler handler)
+static int 
+set_token(token_handler handler)
 {
     int index = 0;
     int token_index = 0;
@@ -208,17 +219,20 @@ static int set_token(token_handler handler)
     return token_index;
 }
 
-static int is_space(char ch)
+static int 
+is_space(char ch)
 {
     return isspace((unsigned char)ch);
 }
 
-static int is_double_quote(char ch)
+static int 
+is_double_quote(char ch)
 {
     return (ch == '\"') ? 1 : 0;
 }
 
-static int is_back_slash(char ch)
+static int 
+is_back_slash(char ch)
 {
     return (ch == '\\') ? 1 : 0;
 }

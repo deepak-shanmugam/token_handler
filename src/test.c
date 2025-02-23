@@ -27,7 +27,8 @@ token_handler tok_handler;
 FILE *input;
 FILE *output;
 
-static int init()
+static int 
+init()
 {
     string = calloc(STRING_LEN, sizeof(*string));
     tok_handler = create_token_handler(STRING_LEN, MAX_TOKEN);
@@ -40,7 +41,8 @@ static int init()
     return 0;
 }
 
-static void close_all()
+static void 
+close_all()
 {
     free(string);
     free_token_handler(tok_handler);
@@ -52,7 +54,8 @@ static void close_all()
     output = NULL;
 }
 
-int main(int argc, char *argv[])
+int 
+main(int argc, char *argv[])
 {
     char *token;
     int index;
@@ -81,17 +84,20 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-static int custom_separator(char ch)
+static int 
+custom_separator(char ch)
 {
     return (ch == ',' || ch == '\n') ? 1 : 0;
 }
 
-static int custom_delimiter(char ch)
+static int 
+custom_delimiter(char ch)
 {
     return (ch == '\0') ? 1 : 0;
 }
 
-static int custom_escape_character(char ch)
+static int 
+custom_escape_character(char ch)
 {
     return (ch == '\\') ? 1 : 0;
 }
